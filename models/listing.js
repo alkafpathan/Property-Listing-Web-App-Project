@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 //creating Schema varieable so i dont user mongoose.Schema
 const Schema = mongoose.Schema;
+const Review = require("./review.js")
 
 //creating Schema for listing
 const listingSchema = new Schema({
@@ -17,7 +18,23 @@ const listingSchema = new Schema({
     price : Number,
     location : String,
     country : String,
+    reviews : [
+        {
+            type: Schema.Types.ObjectId, 
+            ref : "Review"
+        }
+    ]
 });
+
+
+//mongoose middleware for propagating deletion of list so it can also delete the of that list 
+listingSchema.post("findOneAndDelete", async (listing) =>{
+    if(listing){
+        await Review.deleteMany({_id : {$in : listing.reviews}})
+    }
+    
+})
+
 
 //creating model with lisingSchema
 const Listing = mongoose.model("Listing",listingSchema);
