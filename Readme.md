@@ -1,6 +1,6 @@
-# 🏕️ Wanderlust — Travel Listing Web App
+# 🏕️ EasyList — Travel Listing Web App
 
-Wanderlust is a **full-stack web application** built using the **MERN-like stack (MongoDB, Express, Node.js, and EJS)** that allows users to view, create, edit, and delete travel listings.  
+EasyList is a **full-stack web application** built using the **MERN-like stack (MongoDB, Express, Node.js, and EJS)** that allows users to view, create, edit, and delete travel listings.  
 It’s a simplified clone of Airbnb, designed for learning CRUD operations and RESTful routing in Express.
 
 ---

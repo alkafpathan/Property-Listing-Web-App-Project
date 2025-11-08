@@ -1,8 +1,14 @@
+if(process.env.NODE_ENV != "production"){
+    require('dotenv').config();
+}
+
+// console.log(process.env.SECRET)
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const port = 8080;
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust" ;
+const MONGO_URL = "mongodb://127.0.0.1:27017/easylist" ;
 const Review = require("./models/review.js");
 const path = require("path");
 const methodOverride = require("method-override");
@@ -13,6 +19,7 @@ const flash = require("connect-flash")
 const passport = require("passport")
 const LocalStrategy = require("passport-local")
 const User = require("./models/user.js")
+
 
 const listingRouter= require("./routes/listing");
 const reviewRouter = require("./routes/review");
@@ -53,7 +60,8 @@ const sessionOptions = {
 
 //basic root api
 app.get("/",(req,res)=>{
-    res.send("hi i am root");
+    res.redirect("/listings")
+    // res.send("hi i am root");
 })
 
 //middleware to create session

@@ -8,7 +8,7 @@
         <div class="row row-cols-lg-4  row-cols-md-3 row-cols-sm-2 row-cols-es-1">
             <% for( listing of allListings) { %>
              <a href="/listings/<%= listing._id %>" class="listinglink">   <div class="card col listing-card" >
-                    <img src="<%= listing.url %>" class="card-img-top" alt="listing_image"  style="height: 20rem;">
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image"  style="height: 20rem;">
                     <div class="card-img-overlay">
                       </div>
                     <div class="card-body">
