@@ -1,5 +1,5 @@
 const Listing = require("../models/listing.js");
-
+const geocodeLocation = require("../public/js/geocoding.js")
 
 //callback of index route
 module.exports.index = async (req,res)=>{
@@ -12,6 +12,12 @@ module.exports.renderNewForm = (req,res)=>{
 }
 
 module.exports.createListing = async (req,res,next)=>{
+          const newGeometry = await geocodeLocation(req.body.listing.location);
+
+          console.log(req.body.listing.location); // { lat: 28.6139, lng: 77.209 }
+        
+
+
     // if(!req.body.listing){
     //     throw new ExpressError(400 , "send valid data for listing")
     // } //insted
@@ -21,7 +27,9 @@ module.exports.createListing = async (req,res,next)=>{
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
     newListing.image = {url , filename};
-    await newListing.save();
+    newListing.geometry = newGeometry;
+    let savedListing = await newListing.save();
+    console.log(savedListing)
     req.flash("success","New Listing Created ");
     res.redirect("/listings");
 }

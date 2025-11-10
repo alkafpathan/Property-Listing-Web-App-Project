@@ -1,15 +1,132 @@
 <footer>
-    <div class="f-info">
-        <div class="f-info-socials">
-            <i class="fa-brands fa-square-facebook"></i>
-            <i class="fa-brands fa-square-instagram"></i>
-            <i class="fa-brands fa-linkedin"></i>
+    <div class="footer-container">
+      <!-- Left: Company Info -->
+      <div class="footer-section">
+        <h4>EasyList</h4>
+        <p>Discover and list amazing stays around the world.</p>
+        <p>&copy; 2025 EasyList Private Limited</p>
+        <p>Developed by Alkaf Khan | <a href="mailto:khanalkaf308@gmail.com">khanalkaf308@gmail.com</a></p>
+      </div>
+  
+      <!-- Center: Useful Links -->
+      <div class="footer-section">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/listings">Listings</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+  
+      <!-- Center: Community -->
+      <div class="footer-section">
+        <h5>Community</h5>
+        <ul>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="#">Help</a></li>
+        </ul>
+      </div>
+  
+      <!-- Right: Socials -->
+      <div class="footer-section">
+        <h5>Follow Me</h5>
+        <div class="footer-socials">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
         </div>
-        <div class="f-info-brand"> &copy; WonderLust Private Limited</div>
-        <div class="f-info-links">
-            <a href="/privicy">Privacy</a>
-            <a href="/terms">Terms</a>
-            <a href="#">Privacy</a>
-        </div>
+      </div>
     </div>
-</footer>
+  </footer>
+  
+  <style>
+    footer {
+      background-color: #f7f7f7;
+      padding: 3rem 5%;
+      font-family: "Plus Jakarta Sans", sans-serif;
+      color: #222;
+      border-top: 1px solid #e0e0e0;
+      margin-top: 10rem;
+    }
+  
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+      gap: 2rem;
+    }
+  
+    .footer-section {
+      flex: 1 1 220px;
+    }
+  
+    .footer-section h4 {
+      color: #fe424d;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+  
+    .footer-section h5 {
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+  
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
+  
+    .footer-section ul li a {
+      text-decoration: none;
+      color: #555;
+      transition: color 0.2s;
+    }
+  
+    .footer-section ul li a:hover {
+      color: #fe424d;
+    }
+  
+    .footer-socials a {
+      display: inline-block;
+      margin-right: 1rem;
+      font-size: 1.2rem;
+      color: #555;
+      transition: color 0.2s;
+    }
+  
+    .footer-socials a:hover {
+      color: #fe424d;
+    }
+  
+    footer p, footer a {
+      font-size: 0.9rem;
+      color: #555;
+    }
+  
+    @media (max-width: 768px) {
+      .footer-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+  
+      .footer-socials a {
+        margin-right: 0.5rem;
+        font-size: 1.4rem;
+      }
+  
+      .footer-section {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+  

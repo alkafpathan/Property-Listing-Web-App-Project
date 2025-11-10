@@ -1,24 +1,70 @@
 <% layout("/layouts/boilerplate") %>
 
-    <body>
-        <h1>All listings</h1>
-        <!-- <form action="/listings/new">
-        <button>Create New listing</button>
-    </form> -->
-        <div class="row row-cols-lg-4  row-cols-md-3 row-cols-sm-2 row-cols-es-1">
-            <% for( listing of allListings) { %>
-             <a href="/listings/<%= listing._id %>" class="listinglink">   <div class="card col listing-card" >
-                    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image"  style="height: 20rem;">
-                    <div class="card-img-overlay">
-                      </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                          <b>  <%= listing.title %> </b><br>
-                          &#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") : "Price not available" %> / night
-                        </p>
-                    </div>
-                </div></a>
-                <% } %>
-        </div>
+<style>
 
-    </body>
+</style>
+
+<body>
+  <div class="top-container">
+    <!-- Filters -->
+    <div id="filters-container">
+      <% const filters = [
+          {icon:"fa-fire", text:"Trending"},
+          {icon:"fa-bed", text:"Rooms"},
+          {icon:"fa-mountain-city", text:"Iconic Cities"},
+          {icon:"fa-mountain", text:"Mountains"},
+          {icon:"fa-fort-awesome", text:"Castles"},
+          {icon:"fa-person-swimming", text:"Amazing Pools"},
+          {icon:"fa-campground", text:"Camping"},
+          {icon:"fa-cow", text:"Farm"},
+          {icon:"fa-snowflake", text:"Arctic"},
+          {icon:"fa-igloo", text:"Dome"}
+      ] %>
+
+      <% filters.forEach(f => { %>
+        <div class="filter">
+          <i class="fa-solid <%= f.icon %>"></i>
+          <p><%= f.text %></p>
+        </div>
+      <% }) %>
+    </div>
+
+    <!-- Tax toggle -->
+    <div class="tax-toggle-container">
+      <label class="tax-toggle">
+        <input type="checkbox" id="switchCheckDefault">
+        <span class="slider"></span>
+      </label>
+      <span class="tax-label">Total after taxes</span>
+    </div>
+  </div>
+
+  <!-- Listings -->
+  <div class="listings-container">
+    <% for(let listing of allListings) { %>
+      <a href="/listings/<%= listing._id %>" class="listinglink">
+        <div class="listing-card">
+          <img src="<%= listing.image.url %>" alt="listing_image">
+          <div class="card-body">
+            <p class="card-text">
+              <b><%= listing.title %></b>
+              <span class="price">&#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") : "Price not available" %> / night</span>
+              <i class="tax-info"> +18% GST</i>
+            </p>
+          </div>
+        </div>
+      </a>
+    <% } %>
+  </div>
+
+  <!-- Tax toggle script -->
+  <script>
+    const taxSwitch = document.getElementById("switchCheckDefault");
+    taxSwitch.addEventListener("change", () => {
+      const taxInfo = document.querySelectorAll(".tax-info");
+      taxInfo.forEach(info => {
+        info.style.display = taxSwitch.checked ? "inline" : "none";
+      });
+    });
+  </script>
+</body>

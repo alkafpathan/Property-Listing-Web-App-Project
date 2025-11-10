@@ -8,13 +8,14 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const port = 8080;
-const MONGO_URL = "mongodb://127.0.0.1:27017/easylist" ;
-const Review = require("./models/review.js");
+// const MONGO_URL = "mongodb://127.0.0.1:27017/easylist" ;
+const dbURL = process.env.ATLASDB_URL;
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate")
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session")
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash")
 const passport = require("passport")
 const LocalStrategy = require("passport-local")
@@ -44,11 +45,24 @@ main().then(()=>{{
     console.log(err);
 })
 async function main(){
-    mongoose.connect(MONGO_URL);
+    mongoose.connect(dbURL);
 }
 
+const store = MongoStore.create({
+    mongoUrl : dbURL,
+    crypto : {
+        secret : process.env.SECRET,
+    },
+    touchAfter : 24 * 3600,
+})
+
+//if any error occur in db store
+store.on("error",(err)=>{
+    console.log("ERROR in mongo session store", err)
+})
 const sessionOptions = {
-    secret : "mysupersecretcode",
+    store,
+    secret : process.env.SECRET,
     resave : false,
     saveUninitialized : true,
     cookie : {
@@ -63,6 +77,8 @@ app.get("/",(req,res)=>{
     res.redirect("/listings")
     // res.send("hi i am root");
 })
+
+
 
 //middleware to create session
 app.use(session(sessionOptions))
